@@ -1,0 +1,43 @@
+article {
+        overflow: hidden;
+        line-height: 150%;
+        padding: 40px;
+        z-index: 1;
+
+        position: relative;
+
+        h1 {
+            line-height: 100%;
+        }
+
+        h2 {
+            line-height: 100%;
+            color: @clr-indigo;
+        }
+
+        a {
+            text-decoration: none;
+            color: @clr-blue-grey;
+
+
+            transition: color 0.1s ease-out;
+
+            &:hover {
+                color: @clr-blue;
+            }
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        p > code,
+        li > code {
+            font-family: @font-mono;
+            display: inline-block;
+            padding: 0px 5px;
+            margin: 0 2px;
+            background: @clr-white;
+            border: solid #dcdddd 1px;
+        }
+    }

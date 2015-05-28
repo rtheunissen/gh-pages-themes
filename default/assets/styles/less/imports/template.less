@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+p, a, li, div, ul, body {
+    font-family: @font-sans;
+    font-size: 1rem;
+}
+
+p, li, pre {
+    max-width: 720px;
+}
+
+pre,code {
+    font-family: @font-mono;
+}
+
+html
+{
+    font-size: 1em;
+    background-color: @clr-white;
+
+    .responsive-when-small({
+        overflow-x: hidden;
+    });
+}
+
+hr {
+    margin: 40px 0 20px -40px;
+    max-width: 760px;
+    border: none;
+}
+
+@import "header";
+@import "menu";
+@import "main";
+@import "footer";

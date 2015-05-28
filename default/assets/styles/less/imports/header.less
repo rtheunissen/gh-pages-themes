@@ -1,0 +1,61 @@
+header
+{
+    border-bottom: 1px solid @clr-grey-200;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    .responsive-when-small-or-medium({
+        position: relative;
+        left: 0;
+        top: 0;
+    });
+
+    width: 100%;
+
+    background-color: @clr-grey-50;
+
+    z-index: 5;
+
+    .logo {
+        display: inline-block;
+        text-decoration: none;
+
+        .name {
+            color: @clr-blue-grey-900;
+            font-size: 2.5rem;
+            line-height: 100%;
+            display: block;
+            font-family: @font-head;
+        }
+
+        .tagline {
+            color: @clr-blue-grey-900;
+            padding-top: 10px;
+            padding-left: 2px;
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.02rem;
+            line-height: 100%;
+            text-transform: uppercase;
+            font-family: @font-sans;
+        }
+    }
+
+    .github {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 30px;
+        img {
+            height: 40px;
+        }
+        transition: opacity 0.1s ease-out;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+
+    padding: 20px 10px 20px 40px;
+}
