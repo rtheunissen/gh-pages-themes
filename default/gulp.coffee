@@ -174,6 +174,8 @@ gulp.task 'watch', ->
     watch files.watch.styles,   gulp.parallel('styles')
     watch files.watch.scripts,  gulp.parallel('scripts')
 
+    gulp.parallel('build')()
+
 
 # Default task to run when using 'gulp'.
 gulp.task 'default', gulp.parallel('build')
