@@ -72,11 +72,8 @@ onError = (error) ->
 
 # Wraps around gulp.src and attaches the default error handler
 open = (glob, options) ->
-    console.log glob, options
-
     gulp
       .src(glob, options or {})
-      .pipe debug()
       .pipe plumber(errorHandler: onError)
 
 
