@@ -1,0 +1,107 @@
+menu {
+        margin: 0;
+        padding: 0;
+        background: @reddit-light;
+        border-right: 1px solid @reddit-gray;
+        position: fixed;
+        left: 0;
+        top: 100px;
+
+        .responsive-when-small-or-medium({
+            border-right: none;
+        });
+
+        z-index: 4;
+
+        width: 250px;
+        padding: 0;
+        margin: 0;
+        padding: 40px 40px 40px 40px;
+
+        min-height: 100%;
+
+        h2 {
+            line-height: 100%;
+            font-weight: normal;
+            color: @reddit-blue;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                a {
+                    color: @reddit-red;
+                    padding-bottom: 2px;
+                    padding-top: 8px;
+                    line-height: 100%;
+                    display: inline-block;
+
+                    text-decoration: none;
+                    font-size: 1rem;
+                    font-weight: 400;
+
+                    border-bottom: 2px solid transparent;
+
+                    transition: border 0.1s ease-out;
+
+                    &:hover {
+                        border-bottom: 2px solid @reddit-red;
+                    }
+                }
+
+                &.selected {
+                    a {
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        .responsive-when-small-or-medium({
+            position: relative;
+            float: left;
+            width: 50%;
+            top: 0;
+        });
+    }
+
+#menu
+{
+    display: none;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    font-size: 0;
+    cursor: pointer;
+
+    .responsive-when-small-or-medium({
+        display: block;
+
+        &:checked {
+            ~ main {
+                right: 0;
+            }
+        }
+    });
+}
+
+label[for="menu"]
+{
+    display: none;
+    cursor: pointer;
+    vertical-align: top;
+    padding: 10px 10px 0px 0;
+    position: relative;
+    left: -10px;
+    font-size: 2rem;
+    font-weight: 100;
+    line-height: 100%;
+    color: @reddit-blue;
+
+    .responsive-when-small-or-medium({
+        display: inline-block;
+    });
+}

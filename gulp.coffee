@@ -22,21 +22,18 @@ mixed_scripts = (files) ->
 
 # Base paths
 paths =
-    assets:    'assets'                 # base asset directory
-    build:     'build'                  # build directory
+    themes: 'themes'
+    assets: 'assets'  # base asset directory
+    build:  'build'   # build directory
 
 files =
     build:
-        css:   'theme.css'
-        js:    'theme.js'
+        css: 'theme.css'
+        js:  'theme.js'
 
     watch:
-        scripts: [
-            asset 'scripts/**'
-        ]
-        styles:  [
-            asset 'styles/**'
-        ]
+        scripts: '**.{coffee,js}'
+        styles:  '**.{less,css}'
         ignore:  [
             'node_modules'
         ]
@@ -75,9 +72,12 @@ onError = (error) ->
 
 # Wraps around gulp.src and attaches the default error handler
 open = (glob, options) ->
+    console.log glob, options
+
     gulp
-        .src(glob, options or {})
-        .pipe plumber(errorHandler: onError)
+      .src(glob, options or {})
+      .pipe debug()
+      .pipe plumber(errorHandler: onError)
 
 
 ###
@@ -86,7 +86,7 @@ open = (glob, options) ->
 ╚═╝ ╩  ╩ ╩═╝╚═╝╚═╝
 ###
 
-styles = () ->
+styles = (dir) ->
 
     ###
     ┬  ┌─┐┌─┐┌─┐
@@ -95,13 +95,13 @@ styles = () ->
     ###
 
     less = () ->
-        open(files.styles.less)
-            .pipe lessc()
+      open(files.styles.less, cwd: dir)
+        .pipe lessc()
 
     # Combine all style steams into one
     streams(less())
-        .pipe postcss [autoprefixer(), mqpacker, csswring]
-        .pipe concat(files.build.css)
+      .pipe postcss [autoprefixer(), mqpacker, csswring]
+      .pipe concat(files.build.css)
 
 
 ###
@@ -110,7 +110,7 @@ styles = () ->
 ╚═╝╚═╝╩╚═╩╩   ╩ ╚═╝
 ###
 
-scripts = () ->
+scripts = (dir) ->
 
     ###
     ┌─┐┌┬┐┬ ┬┌─┐┬─┐
@@ -121,7 +121,7 @@ scripts = () ->
     other = () ->
         # Return an open stream to be combined later on.
         # Only applies the coffeescript filter to .coffee files
-        open(files.scripts.other)
+        open(files.scripts.other, cwd: dir)
             .pipe gulpif(/[.]coffee$/, coffee(bare: true))
 
     # Combine all script streams in order to prepare for build
@@ -137,9 +137,9 @@ scripts = () ->
 ###
 
 # Only groups and writes the file - no versioning or compression
-build = (stream) ->
+build = (stream, dir) ->
     stream
-        .pipe gulp.dest(paths.build)
+        .pipe gulp.dest(path.join(dir, paths.build))
         .pipe livereload()
 
 
@@ -152,27 +152,23 @@ watch = (src, tasks) ->
     chokidar.watch(src, options).on 'all', -> tasks()
 
 
-# Builds all styles: less, css
-gulp.task 'styles', ->
-    build(styles())
-
-
-# Builds all scripts: coffee, js
-gulp.task 'scripts', ->
-    build(scripts())
-
-
 # This is the basic build script, usually referenced by other tasks
-gulp.task 'build', gulp.parallel('styles', 'scripts')
+gulp.task 'build', ->
+
+  fs.readdirSync(paths.themes).map (dir) ->
+
+    relative = path.join(paths.themes, dir)
+
+    build(scripts(relative), relative)
+    build(styles(relative), relative)
 
 
 # Automatically re-compile assets when they are modified.
-# Doesn't make sense to run this on production.
 gulp.task 'watch', ->
     livereload.listen()
 
-    watch files.watch.styles,   gulp.parallel('styles')
-    watch files.watch.scripts,  gulp.parallel('scripts')
+    watch path.join(paths.themes, '**', 'assets', files.watch.styles),   gulp.parallel('build')
+    watch path.join(paths.themes, '**', 'assets', files.watch.scripts),  gulp.parallel('build')
 
     gulp.parallel('build')()
 

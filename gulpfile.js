@@ -7,12 +7,14 @@ concat          = require('gulp-concat');
 uglify          = require('gulp-uglify');
 coffee          = require('gulp-coffee');
 plumber         = require('gulp-plumber');
+debug           = require('gulp-debug');
 
 postcss         = require('gulp-postcss');
 autoprefixer    = require('autoprefixer-core');
 mqpacker        = require('css-mqpacker');
 csswring        = require('csswring');
 
+fs              = require('fs');
 argv            = require('yargs').argv;
 path            = require('path');
 streamqueue     = require('streamqueue');

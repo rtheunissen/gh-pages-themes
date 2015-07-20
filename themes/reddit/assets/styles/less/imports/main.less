@@ -1,0 +1,19 @@
+main
+{
+    position: relative;
+    background: white;
+
+    padding-top: 100px;
+    padding-left: 250px;
+
+    transition: right 0.2s ease-out;
+
+    .responsive-when-small-or-medium({
+        width: 200%;
+        padding-top: 0px;
+        padding-left: 0px;
+        right: 100%;
+    });
+
+    @import "article";
+}

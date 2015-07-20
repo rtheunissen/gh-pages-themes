@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="build/theme.css">
+  </head>
+  <body>
+
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <p>Paragraph</p>
+    <div class="highlight">
+      <pre>
+        <code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Concat\Config\Container\AbstractContainer</span><span class="p">;</span>
+
+          <span class="k">class</span> <span class="nc">Configuration</span> <span class="k">extends</span> <span class="nx">AbstractContainer</span>
+          <span class="p">{</span>
+              <span class="sd">/**</span>
+          <span class="sd">     * Returns an associative array of expected types, with names mapped to</span>
+          <span class="sd">     * either a single type or an array of accepted types. These types can be</span>
+          <span class="sd">     * \Concat\Config\Container\Value constants or class names. You can also</span>
+          <span class="sd">     * specify `null` as an expected type, which allows null evaluations.</span>
+          <span class="sd">     */</span>
+              <span class="k">protected</span> <span class="k">function</span> <span class="nf">getExpectedTypes</span><span class="p">()</span>
+              <span class="p">{</span>
+                  <span class="k">return</span> <span class="p">[</span>
+
+                      <span class="c1">// Amount of time before an HTTP request times out</span>
+                      <span class="s2">"timeout"</span> <span class="o">=&gt;</span> <span class="nx">Value</span><span class="o">::</span><span class="na">TYPE_INTEGER</span><span class="p">,</span>
+
+                      <span class="s2">"logging"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+
+                          <span class="c1">// PSR-3 logger implementation</span>
+                          <span class="s2">"logger"</span> <span class="o">=&gt;</span> <span class="s2">"Psr\Log\LoggerInterface"</span><span class="p">,</span>
+
+                          <span class="c1">// Log level to use for the logger</span>
+                          <span class="s2">"logLevel"</span> <span class="o">=&gt;</span> <span class="nx">Value</span><span class="o">::</span><span class="na">TYPE_STRING</span><span class="p">,</span>
+                      <span class="p">],</span>
+                  <span class="p">];</span>
+              <span class="p">}</span>
+
+              <span class="sd">/**</span>
+          <span class="sd">     * Returns an associative array of optional default values, with names</span>
+          <span class="sd">     * mapped to a single value. This value can also be a class name, which will</span>
+          <span class="sd">     * be evaluated when first requested. You can also specify callables which</span>
+          <span class="sd">     * will evaluate to their result when the value is requested, however this</span>
+          <span class="sd">     * does not work if a callable is also an acceptable value type.</span>
+          <span class="sd">     */</span>
+              <span class="k">protected</span> <span class="k">function</span> <span class="nf">getDefaultValues</span><span class="p">()</span>
+              <span class="p">{</span>
+                  <span class="k">return</span> <span class="p">[</span>
+
+                      <span class="c1">// Amount of time before an HTTP request times out</span>
+                      <span class="s2">"timeout"</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+
+                      <span class="s2">"logging"</span> <span class="o">=&gt;</span> <span class="p">[</span>
+
+                          <span class="c1">// Log level to use for the logger</span>
+                          <span class="s2">"logLevel"</span> <span class="o">=&gt;</span> <span class="s2">"debug"</span><span class="p">,</span>
+                      <span class="p">],</span>
+                  <span class="p">];</span>
+              <span class="p">}</span>
+          <span class="p">}</span>
+        </code>
+      </pre>
+    </div>
+  </body>
+</html>

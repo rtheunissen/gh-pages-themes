@@ -1,0 +1,34 @@
+
+@vw-small:  720px;
+@vw-medium: 960px;
+@vw-large:  1280px;
+
+.responsive-when-small(@rules) {
+    @media (max-width: @vw-small) {
+        @rules();
+    }
+}
+
+.responsive-when-small-or-medium(@rules) {
+    @media (max-width: @vw-medium) {
+        @rules();
+    }
+}
+
+.responsive-when-medium(@rules) {
+    @media (min-width: @vw-small + 1) and (max-width: @vw-medium) {
+        @rules();
+    }
+}
+
+.responsive-when-medium-or-large(@rules) {
+    @media (min-width: @vw-medium + 1) {
+        @rules();
+    }
+}
+
+.responsive-when-large(@rules) {
+    @media (min-width: @vw-large + 1) {
+        @rules();
+    }
+}

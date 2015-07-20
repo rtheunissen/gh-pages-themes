@@ -1,0 +1,43 @@
+article {
+        overflow: hidden;
+        line-height: 150%;
+        padding: 40px;
+        z-index: 1;
+
+        position: relative;
+
+        h1 {
+            line-height: 100%;
+        }
+
+        h2 {
+            line-height: 100%;
+            color: @reddit-navy;
+        }
+
+        a {
+            text-decoration: none;
+            color: @reddit-blue;
+
+
+            transition: color 0.1s ease-out;
+
+            &:hover {
+                color: @reddit-blue;
+            }
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        p > code,
+        li > code {
+            font-family: @font-mono;
+            display: inline-block;
+            padding: 0px 5px;
+            margin: 0 2px;
+            background: @reddit-light;
+            border: solid #dcdddd 1px;
+        }
+    }
